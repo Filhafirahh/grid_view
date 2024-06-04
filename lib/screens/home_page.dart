@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modul_3/components/note_card.dart';
 import 'package:modul_3/providers/note_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,16 @@ class HomePage extends StatelessWidget {
         child: Consumer<NoteProvider>(
           builder: (context, value, child) {
             // TODO 4 : Make a gridview using GridView.builder to populate the body with datas, but if the noteList is still empty render a centered text of "No Notes Added Yet!". Try using components provided in components folder to populate the GridView.builder//
-            return const SizedBox();
+            return GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemCount: noteList.length,
+              itemBuilder: (context, index) => NoteCard(
+                note: value.noteList[index].note,
+                title: value.noteList[index].title,
+                description: value.noteList[index].description,
+              ),
+            );
           },
         ),
       ),

@@ -13,9 +13,16 @@ class AddNotePage extends StatefulWidget {
 class _AddNotePageState extends State<AddNotePage> {
   // TODO 1 ; Add TextEditingController for each of the TextFormField
 
+  final myController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final noteController = TextEditingController();
+
   @override
   void dispose() {
     // TODO 2 : Dispose all of the TextEditingController
+    myController.dispose();
+    descriptionController.dispose();
+    noteController.dispose();
     super.dispose();
   }
 
@@ -42,6 +49,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 children: [
                   TextFormField(
                     // TODO 1 ; Add TextEditingController for each of the TextFormField
+                    controller: myController,
                     decoration: const InputDecoration(
                       hintText: "Title",
                       border: OutlineInputBorder(),
@@ -58,6 +66,7 @@ class _AddNotePageState extends State<AddNotePage> {
                   const SizedBox(height: 12),
                   TextFormField(
                     // TODO 1 ; Add TextEditingController for each of the TextFormField
+                    controller: descriptionController,
                     decoration: const InputDecoration(
                       hintText: "Description",
                       border: OutlineInputBorder(),
@@ -67,6 +76,7 @@ class _AddNotePageState extends State<AddNotePage> {
                   const SizedBox(height: 12),
                   TextFormField(
                     // TODO 1 ; Add TextEditingController for each of the TextFormField
+                    controller: noteController,
                     decoration: const InputDecoration(
                       hintText: "Notes",
                       border: OutlineInputBorder(),
@@ -88,9 +98,9 @@ class _AddNotePageState extends State<AddNotePage> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   // TODO 3 ; These variables should access each of the controller's trimmed text.
-                  final title = "";
-                  final note = "";
-                  final description = "";
+                  final title = myController.text.trim();
+                  final note = descriptionController.text.trim();
+                  final description = noteController.text.trim();
 
                   if (description.isNotEmpty) {
                     final NoteModel addNote = NoteModel(
